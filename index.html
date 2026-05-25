@@ -1,88 +1,33 @@
-<!DOCTYPE html>
-<html lang="uz">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScoutUz Menu</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--tg-theme-bg-color, #ffffff);
-            color: var(--tg-theme-text-color, #222222);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        body { 
+            font-family: sans-serif; 
+            text-align: center; 
+            padding: 20px; 
+            background-color: #f4f4f9;
         }
-        h2 {
-            margin-bottom: 5px;
-            color: #3498db;
-        }
-        p {
-            margin-top: 0;
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-        }
-        .card {
-            background-color: var(--tg-theme-secondary-bg-color, #f1f2f6);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .menu-item {
+            display: block; 
+            width: 100%; 
+            padding: 15px; 
+            margin: 10px 0;
+            background: #2481cc; 
+            color: white; 
+            border: none;
+            border-radius: 12px; 
+            font-size: 16px; 
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .card:active {
-            transform: scale(0.95);
-        }
-        .card-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
-
-    <h2>ScoutUz Mini App</h2>
-    <p>Kerakli bo'limni tanlang</p>
-
-    <div class="grid">
-        <div class="card" onclick="showAlert('Ta\'lim markazlari')">
-            <div class="card-icon">🎓</div>
-            <div>Markazlar</div>
-        </div>
-        <div class="card" onclick="showAlert('O\'quv joylari')">
-            <div class="card-icon">📚</div>
-            <div>O'quv joylari</div>
-        </div>
-        <div class="card" onclick="showAlert('Volontyorlik')">
-            <div class="card-icon">🤝</div>
-            <div>Volontyorlik</div>
-        </div>
-        <div class="card" onclick="showAlert('Imkoniyatlar')">
-            <div class="card-icon">🌟</div>
-            <div>Imkoniyatlar</div>
-        </div>
-    </div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand(); // Opens full screen inside Telegram
-
-        function showAlert(section) {
-            tg.showAlert(`Tez orada: ${section} bo'limi ishga tushadi!`);
-        }
-    </script>
+    <h2>ScoutEdu</h2>
+    <button class="menu-item" onclick="alert('Profil sahifasi')">👤 Profil</button>
+    <button class="menu-item" onclick="alert('About ScoutEdu sahifasi')">ℹ️ About ScoutEdu</button>
+    <button class="menu-item" onclick="alert('Ariza yuborish sahifasi')">📝 Ariza yuborish</button>
 </body>
 </html>
