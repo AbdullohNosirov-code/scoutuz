@@ -6,7 +6,6 @@
 <title>ScoutEdu</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.383.0/umd/lucide.min.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -152,34 +151,16 @@
     transition: background 0.2s, transform 0.15s, border-color 0.2s;
   }
   .sec-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.13); }
-
-  .sec-icon-wrap {
-    width: 42px; height: 42px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 10px;
-  }
-  .sec-icon-wrap svg { width: 22px; height: 22px; stroke-width: 1.8; }
-
-  .sec-btn.blue  .sec-icon-wrap { background: rgba(96,165,250,0.15); }
-  .sec-btn.blue  .sec-icon-wrap svg { stroke: #60a5fa; }
-  .sec-btn.green .sec-icon-wrap { background: rgba(74,222,128,0.15); }
-  .sec-btn.green .sec-icon-wrap svg { stroke: #4ade80; }
-  .sec-btn.amber .sec-icon-wrap { background: rgba(251,191,36,0.15); }
-  .sec-btn.amber .sec-icon-wrap svg { stroke: #fbbf24; }
-  .sec-btn.coral .sec-icon-wrap { background: rgba(251,113,133,0.15); }
-  .sec-btn.coral .sec-icon-wrap svg { stroke: #fb7185; }
-  .sec-btn.purple .sec-icon-wrap { background: rgba(167,139,250,0.15); }
-  .sec-btn.purple .sec-icon-wrap svg { stroke: #a78bfa; }
-
-  .sec-btn.blue   { border-color: rgba(96,165,250,0.22); }
-  .sec-btn.green  { border-color: rgba(74,222,128,0.22); }
-  .sec-btn.amber  { border-color: rgba(251,191,36,0.22); }
-  .sec-btn.coral  { border-color: rgba(251,113,133,0.22); }
-  .sec-btn.purple { border-color: rgba(167,139,250,0.22); }
-  .sec-btn.full   { grid-column: span 2; }
-
+  .sec-icon  { font-size: 26px; margin-bottom: 9px; display: block; }
   .sec-title { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.3; }
   .sec-count { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 4px; }
+
+  .sec-btn.blue   { border-color: rgba(96,165,250,0.28); }
+  .sec-btn.green  { border-color: rgba(74,222,128,0.28); }
+  .sec-btn.amber  { border-color: rgba(251,191,36,0.28); }
+  .sec-btn.coral  { border-color: rgba(251,113,133,0.28); }
+  .sec-btn.purple { border-color: rgba(167,139,250,0.28); }
+  .sec-btn.full   { grid-column: span 2; }
 
   /* ── Ticker ── */
   #tickerWrap {
@@ -207,9 +188,8 @@
     border: 1px solid rgba(255,255,255,0.11);
     white-space: nowrap; font-size: 13px; font-weight: 700; color: #fff;
     cursor: pointer;
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; gap: 6px;
   }
-  .ticker-pill svg { width: 14px; height: 14px; stroke-width: 2; flex-shrink: 0; }
   .ticker-pill:active { background: rgba(255,255,255,0.15); }
 
   /* ── Detail screen ── */
@@ -227,39 +207,36 @@
     padding: 16px 18px;
     display: flex; align-items: center; gap: 12px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    position: sticky; top: 0;
-    background: #0a1628; z-index: 10;
   }
   .back-btn {
     width: 36px; height: 36px; border-radius: 12px;
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.12);
-    color: #fff; cursor: pointer;
+    color: #fff; font-size: 18px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
   }
-  .back-btn svg { width: 18px; height: 18px; stroke: #fff; stroke-width: 2; }
   .detail-title { font-size: 17px; font-weight: 900; color: #fff; }
 
   .card-list { padding: 14px 16px; display: flex; flex-direction: column; gap: 12px; }
 
   .info-card {
-    padding: 16px; border-radius: 18px;
+    padding: 16px;
+    border-radius: 18px;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
   }
   .info-card-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-  .info-card-tag {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 3px 10px; border-radius: 20px;
+  .info-card-tag  {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
     background: rgba(96,165,250,0.15); color: #60a5fa;
     font-size: 11px; font-weight: 700; margin-bottom: 10px;
   }
   .info-row {
     display: flex; align-items: center; gap: 8px;
     font-size: 13px; color: rgba(255,255,255,0.55);
-    margin-top: 6px;
+    margin-top: 5px;
   }
-  .info-row svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.4); stroke-width: 2; flex-shrink: 0; }
+  .info-row span { font-size: 14px; }
 </style>
 </head>
 <body>
@@ -270,7 +247,7 @@
 
 <!-- Language Overlay -->
 <div id="langOverlay">
-  <div class="lang-title">Tilni tanlang</div>
+  <div class="lang-title" id="lo-title">Tilni tanlang</div>
   <div class="lang-sub">Выберите язык / Choose language</div>
   <button class="lang-btn" onclick="setLang('uz')">
     <span class="lang-flag">🇺🇿</span><span>O'zbekcha</span>
@@ -300,28 +277,28 @@
   </div>
 
   <div id="sectionGrid">
-    <button class="sec-btn blue" onclick="openDetail('edu')">
-      <div class="sec-icon-wrap" id="icon-edu"></div>
+    <button class="sec-btn blue"   onclick="openDetail('edu')">
+      <span class="sec-icon">🎓</span>
       <div class="sec-title" id="t-edu"></div>
       <div class="sec-count" id="s-edu"></div>
     </button>
-    <button class="sec-btn green" onclick="openDetail('study')">
-      <div class="sec-icon-wrap" id="icon-study"></div>
+    <button class="sec-btn green"  onclick="openDetail('study')">
+      <span class="sec-icon">📚</span>
       <div class="sec-title" id="t-study"></div>
       <div class="sec-count" id="s-study"></div>
     </button>
-    <button class="sec-btn amber" onclick="openDetail('vol')">
-      <div class="sec-icon-wrap" id="icon-vol"></div>
+    <button class="sec-btn amber"  onclick="openDetail('vol')">
+      <span class="sec-icon">🤝</span>
       <div class="sec-title" id="t-vol"></div>
       <div class="sec-count" id="s-vol"></div>
     </button>
-    <button class="sec-btn coral" onclick="openDetail('opp')">
-      <div class="sec-icon-wrap" id="icon-opp"></div>
+    <button class="sec-btn coral"  onclick="openDetail('opp')">
+      <span class="sec-icon">🌟</span>
       <div class="sec-title" id="t-opp"></div>
       <div class="sec-count" id="s-opp"></div>
     </button>
     <button class="sec-btn purple full" onclick="openDetail('youth')">
-      <div class="sec-icon-wrap" id="icon-youth"></div>
+      <span class="sec-icon">🏛️</span>
       <div class="sec-title" id="t-youth"></div>
       <div class="sec-count" id="s-youth"></div>
     </button>
@@ -333,40 +310,21 @@
   </div>
 </div>
 
-<!-- Detail Screen -->
+<!-- Detail Screen (slides up) -->
 <div id="detailScreen">
   <div class="detail-top">
-    <button class="back-btn" onclick="closeDetail()">
-      <svg viewBox="0 0 24 24" fill="none"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
+    <button class="back-btn" onclick="closeDetail()">←</button>
     <div class="detail-title" id="detailTitle"></div>
   </div>
   <div class="card-list" id="cardList"></div>
 </div>
 
 <script>
+// ── Telegram Web App init ──
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
-// Section icons (lucide icon names)
-const ICONS = {
-  edu:   'graduation-cap',
-  study: 'book-open',
-  vol:   'handshake',
-  opp:   'star',
-  youth: 'landmark',
-};
-
-const TICKER_ICONS = {
-  edu:   'graduation-cap',
-  study: 'book-open',
-  vol:   'handshake',
-  opp:   'star',
-  youth: 'landmark',
-  abroad:'plane',
-  startup:'lightbulb',
-};
-
+// ── Translations ──
 const T = {
   uz: {
     heroQuestion: "O'zingizga kerakli bo'limni tanlang",
@@ -381,36 +339,28 @@ const T = {
       opp:   { title: "Imkoniyatlar",       sub: "Grant · Stipendiya" },
       youth: { title: "Yoshlar Agentligi",  sub: "Davlat dasturlari" },
     },
-    ticker: [
-      { icon: 'edu',     label: "Ta'lim markazlari" },
-      { icon: 'study',   label: "Kutubxonalar" },
-      { icon: 'vol',     label: "Volontyorlik" },
-      { icon: 'opp',     label: "Grantlar" },
-      { icon: 'youth',   label: "Yoshlar Agentligi" },
-      { icon: 'abroad',  label: "Chet elda ta'lim" },
-      { icon: 'startup', label: "Startap dasturlari" },
-    ],
+    ticker: ["🎓 Ta'lim markazlari","📚 Kutubxonalar","🤝 Volontyorlik","🌟 Grantlar","🏛️ Yoshlar Agentligi","📖 O'quv joylari","✈️ Chet elda ta'lim","💡 Startap dasturlari"],
     data: {
       edu: [
-        { name: "Cambridge Assessment", tag: "IELTS / SAT", location: "Yunusobod, Toshkent", phone: "+998 71 200 00 00", price: "500,000 – 1,000,000 UZS" },
-        { name: "Global Education",     tag: "IELTS / TOEFL", location: "Chilonzor, Toshkent", phone: "+998 71 200 11 11", price: "400,000 – 900,000 UZS" },
-        { name: "Lingua School",        tag: "Ingliz tili", location: "Mirzo Ulug'bek", phone: "+998 71 200 22 22", price: "350,000 – 700,000 UZS" },
+        { name: "Cambridge Assessment", tag: "IELTS / SAT", location: "📍 Yunusobod, Toshkent", phone: "📞 +998 71 200 00 00", price: "💰 500,000 – 1,000,000 UZS" },
+        { name: "Global Education", tag: "IELTS / TOEFL", location: "📍 Chilonzor, Toshkent", phone: "📞 +998 71 200 11 11", price: "💰 400,000 – 900,000 UZS" },
+        { name: "Lingua School", tag: "Ingliz tili", location: "📍 Mirzo Ulug'bek", phone: "📞 +998 71 200 22 22", price: "💰 350,000 – 700,000 UZS" },
       ],
       study: [
-        { name: "Ground Zero Coworking",       tag: "Kovorking", location: "Chilonzor tumani", phone: "+998 71 200 11 11", price: "50,000 UZS / kun" },
-        { name: "Alisher Navoiy Kutubxonasi",  tag: "Kutubxona", location: "Mustaqillik maydoni", phone: "+998 71 232 00 00", price: "Bepul" },
+        { name: "Ground Zero Coworking", tag: "Kovorking", location: "📍 Chilonzor tumani", phone: "📞 +998 71 200 11 11", price: "💰 50,000 UZS / kun" },
+        { name: "Alisher Navoiy Kutubxonasi", tag: "Kutubxona", location: "📍 Mustaqillik maydoni", phone: "📞 +998 71 232 00 00", price: "💰 Bepul" },
       ],
       vol: [
-        { name: "Yashil Makon ko'chat ekish", tag: "Ekologiya", location: "Butun O'zbekiston", phone: "@yashil_makon_bot", price: "Doimiy" },
-        { name: "Yoshlar Forum yordamchisi",  tag: "Tadbirlar",  location: "Toshkent", phone: "@yoshlar_forum", price: "Yillik" },
+        { name: "Yashil Makon ko'chat ekish", tag: "Ekologiya", location: "📍 Butun O'zbekiston", phone: "📞 @yashil_makon_bot", price: "🗓 Doimiy" },
+        { name: "Yoshlar Forum yordamchisi", tag: "Tadbirlar", location: "📍 Toshkent", phone: "📞 @yoshlar_forum", price: "🗓 Yillik" },
       ],
       opp: [
-        { name: "IT Park Startup Grant", tag: "Grantlar",    location: "Toshkent IT Park", phone: "@itpark_uz",  price: "31.12.2026" },
-        { name: "Umid Scholarship",      tag: "Stipendiya",  location: "O'zbekiston",       phone: "@umid_fund", price: "01.03.2026" },
+        { name: "IT Park Startup Grant", tag: "Grantlar", location: "📍 Toshkent IT Park", phone: "📞 @itpark_uz", price: "🗓 31.12.2026" },
+        { name: "Umid Scholarship", tag: "Stipendiya", location: "📍 O'zbekiston", phone: "📞 @umid_fund", price: "🗓 01.03.2026" },
       ],
       youth: [
-        { name: "Yoshlar Agentligi",     tag: "Davlat", location: "Toshkent", phone: "@yoshlar_agency", price: "yoshlar.uz" },
-        { name: "Prezident Maktablari",  tag: "Ta'lim", location: "Butun O'zbekiston", phone: "@prez_school", price: "president.school.uz" },
+        { name: "Yoshlar Agentligi", tag: "Davlat", location: "📍 Toshkent", phone: "📞 @yoshlar_agency", price: "🌐 yoshlar.uz" },
+        { name: "Prezident Maktablari", tag: "Ta'lim", location: "📍 Butun O'zbekiston", phone: "📞 @prez_school", price: "🌐 president.school.uz" },
       ],
     }
   },
@@ -418,6 +368,7 @@ const T = {
     heroQuestion: "Выберите нужный раздел",
     heroSub: "5 направлений доступно",
     tickerLabel: "Популярное",
+    back: "Назад",
     langCode: "RU", flag: "🇷🇺",
     sections: {
       edu:   { title: "Учебные центры",     sub: "IELTS · SAT · Курсы" },
@@ -426,45 +377,31 @@ const T = {
       opp:   { title: "Возможности",         sub: "Гранты · Стипендии" },
       youth: { title: "Агентство молодёжи", sub: "Гос. программы" },
     },
-    ticker: [
-      { icon: 'edu',     label: "Учебные центры" },
-      { icon: 'study',   label: "Библиотеки" },
-      { icon: 'vol',     label: "Волонтёрство" },
-      { icon: 'opp',     label: "Гранты" },
-      { icon: 'youth',   label: "Агентство молодёжи" },
-      { icon: 'abroad',  label: "Учёба за рубежом" },
-      { icon: 'startup', label: "Стартап-программы" },
-    ],
+    ticker: ["🎓 Учебные центры","📚 Библиотеки","🤝 Волонтёрство","🌟 Гранты","🏛️ Агентство молодёжи","📖 Места для учёбы","✈️ Учёба за рубежом","💡 Стартап-программы"],
     data: {
       edu: [
-        { name: "Cambridge Assessment", tag: "IELTS / SAT", location: "Юнусабад, Ташкент", phone: "+998 71 200 00 00", price: "500 000 – 1 000 000 сум" },
-        { name: "Global Education",     tag: "IELTS / TOEFL", location: "Чиланзар, Ташкент", phone: "+998 71 200 11 11", price: "400 000 – 900 000 сум" },
+        { name: "Cambridge Assessment", tag: "IELTS / SAT", location: "📍 Юнусабад, Ташкент", phone: "📞 +998 71 200 00 00", price: "💰 500 000 – 1 000 000 сум" },
+        { name: "Global Education", tag: "IELTS / TOEFL", location: "📍 Чиланзар, Ташкент", phone: "📞 +998 71 200 11 11", price: "💰 400 000 – 900 000 сум" },
       ],
       study: [
-        { name: "Ground Zero Коворкинг",    tag: "Коворкинг",  location: "Чиланзарский район", phone: "+998 71 200 11 11", price: "50 000 сум / день" },
-        { name: "Библиотека Навои",          tag: "Библиотека", location: "Пл. Независимости",  phone: "+998 71 232 00 00", price: "Бесплатно" },
+        { name: "Ground Zero Коворкинг", tag: "Коворкинг", location: "📍 Чиланзарский район", phone: "📞 +998 71 200 11 11", price: "💰 50 000 сум / день" },
+        { name: "Библиотека Навои", tag: "Библиотека", location: "📍 Площадь Независимости", phone: "📞 +998 71 232 00 00", price: "💰 Бесплатно" },
       ],
       vol: [
-        { name: "Посадка деревьев Yashil Makon", tag: "Экология", location: "Весь Узбекистан", phone: "@yashil_makon_bot", price: "Постоянно" },
+        { name: "Посадка деревьев Yashil Makon", tag: "Экология", location: "📍 Весь Узбекистан", phone: "📞 @yashil_makon_bot", price: "🗓 Постоянно" },
       ],
       opp: [
-        { name: "IT Park Startup Grant", tag: "Гранты",     location: "IT Park Ташкент", phone: "@itpark_uz",  price: "31.12.2026" },
-        { name: "Стипендия Умид",        tag: "Стипендия",  location: "Узбекистан",       phone: "@umid_fund", price: "01.03.2026" },
+        { name: "IT Park Startup Grant", tag: "Гранты", location: "📍 IT Park Ташкент", phone: "📞 @itpark_uz", price: "🗓 31.12.2026" },
+        { name: "Стипендия Умид", tag: "Стипендия", location: "📍 Узбекистан", phone: "📞 @umid_fund", price: "🗓 01.03.2026" },
       ],
       youth: [
-        { name: "Агентство молодёжи",  tag: "Гос. орган", location: "Ташкент",         phone: "@yoshlar_agency", price: "yoshlar.uz" },
+        { name: "Агентство молодёжи", tag: "Гос. орган", location: "📍 Ташкент", phone: "📞 @yoshlar_agency", price: "🌐 yoshlar.uz" },
       ],
     }
   }
 };
 
 let lang = 'uz';
-
-function makeLucideIcon(name) {
-  const el = document.createElement('i');
-  el.setAttribute('data-lucide', name);
-  return el;
-}
 
 function setLang(l) {
   lang = l;
@@ -482,23 +419,13 @@ function applyLang(l) {
   document.getElementById('tickerLabel').textContent   = t.tickerLabel;
   document.getElementById('currentFlag').textContent   = t.flag;
   document.getElementById('currentLangCode').textContent = t.langCode;
-
   Object.keys(t.sections).forEach(k => {
     document.getElementById('t-' + k).textContent = t.sections[k].title;
     document.getElementById('s-' + k).textContent = t.sections[k].sub;
-    const wrap = document.getElementById('icon-' + k);
-    wrap.innerHTML = '';
-    wrap.appendChild(makeLucideIcon(ICONS[k]));
   });
-
-  // Ticker
   const items = [...t.ticker, ...t.ticker];
-  document.getElementById('tickerTrack').innerHTML = items.map(item => {
-    const iconName = TICKER_ICONS[item.icon] || 'star';
-    return `<div class="ticker-pill"><i data-lucide="${iconName}"></i>${item.label}</div>`;
-  }).join('');
-
-  lucide.createIcons();
+  document.getElementById('tickerTrack').innerHTML =
+    items.map(i => `<div class="ticker-pill">${i}</div>`).join('');
 }
 
 function reopenLang() {
@@ -513,12 +440,11 @@ function openDetail(key) {
     <div class="info-card">
       <div class="info-card-name">${item.name}</div>
       <div class="info-card-tag">${item.tag}</div>
-      <div class="info-row"><i data-lucide="map-pin"></i>${item.location}</div>
-      <div class="info-row"><i data-lucide="phone"></i>${item.phone}</div>
-      <div class="info-row"><i data-lucide="tag"></i>${item.price}</div>
+      <div class="info-row"><span>📍</span>${item.location.replace('📍 ','')}</div>
+      <div class="info-row"><span>📞</span>${item.phone.replace('📞 ','')}</div>
+      <div class="info-row"><span>💰</span>${item.price.replace(/^[💰🗓🌐] /,'')}</div>
     </div>
   `).join('');
-  lucide.createIcons();
   document.getElementById('detailScreen').classList.add('open');
   if (tg) tg.BackButton.show();
 }
@@ -530,7 +456,7 @@ function closeDetail() {
 
 if (tg) tg.BackButton.onClick(closeDetail);
 
-// Stars
+// ── Stars ──
 const sl = document.getElementById('starsLayer');
 for (let i = 0; i < 80; i++) {
   const s = document.createElement('div');
@@ -540,7 +466,7 @@ for (let i = 0; i < 80; i++) {
   sl.appendChild(s);
 }
 
-// Clouds
+// ── Clouds ──
 const cl = document.getElementById('cloudLayer');
 for (let i = 0; i < 6; i++) {
   const c = document.createElement('div');
