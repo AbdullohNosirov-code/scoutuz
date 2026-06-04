@@ -254,7 +254,17 @@
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
   }
-  .info-card-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .info-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  }
+  .info-card-logo {
+    width: 52px; height: 52px; border-radius: 14px;
+    object-fit: cover; flex-shrink: 0;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .info-card-title { flex: 1; }
+  .info-card-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
   .info-card-tag  {
     display: inline-block; padding: 3px 10px; border-radius: 20px;
     background: rgba(96,165,250,0.15); color: #60a5fa;
@@ -394,29 +404,30 @@ const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 
 // ── Data ──
+const BASE = "https://abdullohnosirov-code.github.io/scoutuz/";
 const EDU_CATEGORIES = {
   uz: {
     SAT: [
-      { name: "Marstiff SAT Academy", location: "Toshkent (2 filial)", phone: "78 113 39 99", url: "https://forms.amocrm.ru/rrmzzwm" },
-      { name: "SATashkent",           location: "Toshkent (2 filial)", phone: "78 555 65 75", url: "https://shorturl.at/7wmXq" },
-      { name: "SAT Makon",            location: "Toshkent (2 filial)", phone: null,            url: "https://satmakon.com/en/start/" },
+      { name: "Marstiff SAT Academy", logo: BASE+"marstiff_logo.jpg",  location: "Toshkent (2 filial)", phone: "78 113 39 99", url: "https://forms.amocrm.ru/rrmzzwm" },
+      { name: "SATashkent",           logo: BASE+"sattashkent.jpg",     location: "Toshkent (2 filial)", phone: "78 555 65 75", url: "https://shorturl.at/7wmXq" },
+      { name: "SAT Makon",            logo: BASE+"satmakon_logo.jpg",   location: "Toshkent (2 filial)", phone: null,            url: "https://satmakon.com/en/start/" },
     ],
     IELTS: [
-      { name: "Inter Nation School",       location: "Toshkent (13 filial)", phone: "78 777 77 07", url: "https://inter-nation.uz/l/telegram" },
-      { name: "Cambridge Learning Center", location: "Toshkent (17 filial)", phone: "78 777 77 74", url: "https://cambridgeonline.uz/registration/" },
-      { name: "Everest Learning Center",   location: "Toshkent (21 filial)", phone: "78 888 80 08", url: "https://taplink.cc/everest_lc" },
+      { name: "Inter Nation School",       logo: BASE+"inter_nationlogo.jpg", location: "Toshkent (13 filial)", phone: "78 777 77 07", url: "https://inter-nation.uz/l/telegram" },
+      { name: "Cambridge Learning Center", logo: BASE+"cambridge_logo.jpg",   location: "Toshkent (17 filial)", phone: "78 777 77 74", url: "https://cambridgeonline.uz/registration/" },
+      { name: "Everest Learning Center",   logo: BASE+"everest_logo.jpg",     location: "Toshkent (21 filial)", phone: "78 888 80 08", url: "https://taplink.cc/everest_lc" },
     ],
   },
   ru: {
     SAT: [
-      { name: "Marstiff SAT Academy", location: "Ташкент (2 филиала)", phone: "78 113 39 99", url: "https://forms.amocrm.ru/rrmzzwm" },
-      { name: "SATashkent",           location: "Ташкент (2 филиала)", phone: "78 555 65 75", url: "https://shorturl.at/7wmXq" },
-      { name: "SAT Makon",            location: "Ташкент (2 филиала)", phone: null,            url: "https://satmakon.com/en/start/" },
+      { name: "Marstiff SAT Academy", logo: BASE+"marstiff_logo.jpg",  location: "Ташкент (2 филиала)", phone: "78 113 39 99", url: "https://forms.amocrm.ru/rrmzzwm" },
+      { name: "SATashkent",           logo: BASE+"sattashkent.jpg",     location: "Ташкент (2 филиала)", phone: "78 555 65 75", url: "https://shorturl.at/7wmXq" },
+      { name: "SAT Makon",            logo: BASE+"satmakon_logo.jpg",   location: "Ташкент (2 филиала)", phone: null,            url: "https://satmakon.com/en/start/" },
     ],
     IELTS: [
-      { name: "Inter Nation School",       location: "Ташкент (13 филиалов)", phone: "78 777 77 07", url: "https://inter-nation.uz/l/telegram" },
-      { name: "Cambridge Learning Center", location: "Ташкент (17 филиалов)", phone: "78 777 77 74", url: "https://cambridgeonline.uz/registration/" },
-      { name: "Everest Learning Center",   location: "Ташкент (21 филиал)",   phone: "78 888 80 08", url: "https://taplink.cc/everest_lc" },
+      { name: "Inter Nation School",       logo: BASE+"inter_nationlogo.jpg", location: "Ташкент (13 филиалов)", phone: "78 777 77 07", url: "https://inter-nation.uz/l/telegram" },
+      { name: "Cambridge Learning Center", logo: BASE+"cambridge_logo.jpg",   location: "Ташкент (17 филиалов)", phone: "78 777 77 74", url: "https://cambridgeonline.uz/registration/" },
+      { name: "Everest Learning Center",   logo: BASE+"everest_logo.jpg",     location: "Ташкент (21 филиал)",   phone: "78 888 80 08", url: "https://taplink.cc/everest_lc" },
     ],
   }
 };
@@ -583,8 +594,13 @@ function renderEduCards(switching = false) {
 
   cardList.innerHTML = centres.map((c, i) => `
     <div class="info-card" style="--card-delay:${i * 0.07}s">
-      <div class="info-card-name">${c.name}</div>
-      <div class="info-card-tag">${activeEduCat}</div>
+      <div class="info-card-header">
+        <img class="info-card-logo" src="${c.logo}" alt="${c.name} logo" onerror="this.style.display='none'">
+        <div class="info-card-title">
+          <div class="info-card-name">${c.name}</div>
+          <div class="info-card-tag">${activeEduCat}</div>
+        </div>
+      </div>
       <div class="info-row"><span>📍</span>${c.location}</div>
       ${c.phone ? `<div class="info-row"><span>📞</span><a href="tel:${c.phone.replace(/\s/g,'')}" style="color:inherit;text-decoration:none;">${c.phone}</a></div>` : ''}
       <a class="register-btn" href="${c.url}" target="_blank">${btnLabel}</a>
@@ -625,4 +641,3 @@ applyLang('uz');
 </script>
 </body>
 </html>
-
