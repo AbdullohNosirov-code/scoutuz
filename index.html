@@ -209,7 +209,7 @@
     transition: background 0.2s, transform 0.15s, border-color 0.2s;
   }
   .sec-btn:active { transform: scale(0.96); background: var(--toggle-bg); }
-  .sec-icon  { font-size: 26px; margin-bottom: 9px; display: block; }
+  .sec-icon  { width: 32px; height: 32px; margin-bottom: 9px; display: block; line-height: 1; }
   .sec-title { font-size: 13px; font-weight: 800; color: var(--text); line-height: 1.3; }
   .sec-count { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
 
@@ -427,28 +427,38 @@
   </div>
 
   <div id="sectionGrid">
-    <button class="sec-btn blue"   onclick="openDetail('edu')">
-      <span class="sec-icon">🎓</span>
+    <button class="sec-btn blue" onclick="openDetail('edu')">
+      <span class="sec-icon">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f393.svg" width="32" height="32" alt="edu">
+      </span>
       <div class="sec-title" id="t-edu"></div>
       <div class="sec-count" id="s-edu"></div>
     </button>
-    <button class="sec-btn green"  onclick="openDetail('study')">
-      <span class="sec-icon">📚</span>
+    <button class="sec-btn green" onclick="openDetail('study')">
+      <span class="sec-icon">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f4da.svg" width="32" height="32" alt="study">
+      </span>
       <div class="sec-title" id="t-study"></div>
       <div class="sec-count" id="s-study"></div>
     </button>
-    <button class="sec-btn amber"  onclick="openDetail('vol')">
-      <span class="sec-icon">🤝</span>
+    <button class="sec-btn amber" onclick="openDetail('vol')">
+      <span class="sec-icon">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f91d.svg" width="32" height="32" alt="vol">
+      </span>
       <div class="sec-title" id="t-vol"></div>
       <div class="sec-count" id="s-vol"></div>
     </button>
-    <button class="sec-btn coral"  onclick="openDetail('opp')">
-      <span class="sec-icon">🌟</span>
+    <button class="sec-btn coral" onclick="openDetail('opp')">
+      <span class="sec-icon">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f31f.svg" width="32" height="32" alt="opp">
+      </span>
       <div class="sec-title" id="t-opp"></div>
       <div class="sec-count" id="s-opp"></div>
     </button>
     <button class="sec-btn purple full" onclick="openDetail('youth')">
-      <span class="sec-icon">🏛️</span>
+      <span class="sec-icon">
+        <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@latest/assets/svg/1f3db.svg" width="32" height="32" alt="youth">
+      </span>
       <div class="sec-title" id="t-youth"></div>
       <div class="sec-count" id="s-youth"></div>
     </button>
@@ -463,7 +473,9 @@
 <!-- Detail Screen -->
 <div id="detailScreen">
   <div class="detail-top">
-    <button class="back-btn" onclick="closeDetail()">←</button>
+    <button class="back-btn" onclick="closeDetail()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
     <div class="detail-title" id="detailTitle"></div>
   </div>
   <!-- Category tabs — only shown for edu -->
@@ -655,9 +667,9 @@ function openDetail(key) {
       <div class="info-card" style="--card-delay:${i * 0.07}s">
         <div class="info-card-name">${item.name}</div>
         <div class="info-card-tag">${item.tag}</div>
-        <div class="info-row"><span>📍</span>${item.location}</div>
-        <div class="info-row"><span>📞</span><a href="tel:${item.phone.replace(/\s/g,'')}" style="color:inherit;text-decoration:none;">${item.phone}</a></div>
-        <div class="info-row"><span>💰</span>${item.price}</div>
+        <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${item.location}</div>
+        <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:${item.phone.replace(/\s/g,'')}" style="color:inherit;text-decoration:none;">${item.phone}</a></div>
+        <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>${item.price}</div>
       </div>
     `).join('');
   }
@@ -700,8 +712,8 @@ function renderEduCards(switching = false) {
           <div class="info-card-tag">${activeEduCat}</div>
         </div>
       </div>
-      <div class="info-row"><span>📍</span>${c.location}</div>
-      ${c.phone ? `<div class="info-row"><span>📞</span><a href="tel:${c.phone.replace(/\s/g,'')}" style="color:inherit;text-decoration:none;">${c.phone}</a></div>` : ''}
+      <div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${c.location}</div>
+      ${c.phone ? `<div class="info-row"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:${c.phone.replace(/\s/g,'')}" style="color:inherit;text-decoration:none;">${c.phone}</a></div>` : ''}
       <a class="register-btn" href="${c.url}" target="_blank">${btnLabel}</a>
     </div>
   `).join('');
