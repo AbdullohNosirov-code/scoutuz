@@ -63,9 +63,9 @@
   /* smooth theme transition */
   body, #sky, #detailScreen, .info-card, .sec-btn,
   .lang-toggle, .ticker-pill, #heroCard, .back-btn,
-  .cat-tab, .info-card-logo { transition: background 0.7s ease, color 0.7s ease, border-color 0.7s ease, box-shadow 0.7s ease; }
+  .cat-tab, .info-card-logo { transition: background 1s ease, color 1s ease, border-color 1s ease, box-shadow 1s ease; }
 
-  #starsLayer { transition: opacity 0.7s ease; }
+  #starsLayer { transition: opacity 1s ease; }
 
   body {
     font-family: 'Nunito', sans-serif;
@@ -373,11 +373,27 @@
     to   { opacity: 1; transform: translateX(0); }
   }
   .card-list.switching { animation: tabFade 0.25s ease both; }
+
+  /* ── Theme ripple ── */
+  #themeRipple {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    transform: scale(0);
+    opacity: 1;
+    transition: none;
+  }
+  @keyframes rippleExpand {
+    0%   { transform: scale(0); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 0; }
+  }
 </style>
 </head>
 <body>
 
 <div id="sky"></div>
+<div id="themeRipple"></div>
 <div class="stars" id="starsLayer"></div>
 <div class="cloud-wrap" id="cloudLayer"></div>
 
@@ -566,11 +582,44 @@ let lang = 'uz';
 let isDark = true;
 
 function toggleTheme() {
+  const btn = document.getElementById('themeToggle');
+  const ripple = document.getElementById('themeRipple');
+
+  // Get button center position
+  const rect = btn.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+
+  // Size ripple to cover full screen from that point
+  const maxDist = Math.max(
+    Math.hypot(cx, cy),
+    Math.hypot(window.innerWidth - cx, cy),
+    Math.hypot(cx, window.innerHeight - cy),
+    Math.hypot(window.innerWidth - cx, window.innerHeight - cy)
+  );
+  const size = maxDist * 2.2;
+
+  // Position and color the ripple
   isDark = !isDark;
-  document.body.classList.toggle('light', !isDark);
-  document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
-  // hide stars in light mode
-  document.getElementById('starsLayer').style.opacity = isDark ? '1' : '0';
+  const rippleColor = isDark ? '#0a1628' : '#dce8ff';
+
+  ripple.style.cssText = `
+    width: ${size}px; height: ${size}px;
+    left: ${cx - size/2}px; top: ${cy - size/2}px;
+    background: ${rippleColor};
+    animation: none;
+  `;
+
+  // Force reflow then animate
+  ripple.offsetWidth;
+  ripple.style.animation = 'rippleExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards';
+
+  // Switch theme halfway through
+  setTimeout(() => {
+    document.body.classList.toggle('light', !isDark);
+    document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+    document.getElementById('starsLayer').style.opacity = isDark ? '1' : '0';
+  }, 120);
 }
 let activeEduCat = 'SAT';
 let currentSection = null;
