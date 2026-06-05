@@ -583,14 +583,13 @@ let isDark = true;
 
 function toggleTheme() {
   const btn = document.getElementById('themeToggle');
-  const ripple = document.getElementById('themeRipple');
 
   // Get button center position
   const rect = btn.getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
 
-  // Size ripple to cover full screen from that point
+  // Size to cover full screen
   const maxDist = Math.max(
     Math.hypot(cx, cy),
     Math.hypot(window.innerWidth - cx, cy),
@@ -599,27 +598,40 @@ function toggleTheme() {
   );
   const size = maxDist * 2.2;
 
-  // Position and color the ripple
   isDark = !isDark;
   const rippleColor = isDark ? '#0a1628' : '#dce8ff';
 
+  // Remove old ripple and create a fresh one each time (works on mobile)
+  const old = document.getElementById('themeRipple');
+  if (old) old.remove();
+
+  const ripple = document.createElement('div');
+  ripple.id = 'themeRipple';
   ripple.style.cssText = `
-    width: ${size}px; height: ${size}px;
-    left: ${cx - size/2}px; top: ${cy - size/2}px;
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 999;
+    width: ${size}px;
+    height: ${size}px;
+    left: ${cx - size/2}px;
+    top: ${cy - size/2}px;
     background: ${rippleColor};
-    animation: none;
+    transform: scale(0);
+    opacity: 0.9;
+    animation: rippleExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   `;
+  document.body.appendChild(ripple);
 
-  // Force reflow then animate
-  ripple.offsetWidth;
-  ripple.style.animation = 'rippleExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards';
-
-  // Switch theme halfway through
+  // Switch theme midway
   setTimeout(() => {
     document.body.classList.toggle('light', !isDark);
     document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
     document.getElementById('starsLayer').style.opacity = isDark ? '1' : '0';
-  }, 120);
+  }, 200);
+
+  // Clean up after animation
+  setTimeout(() => ripple.remove(), 1300);
 }
 let activeEduCat = 'SAT';
 let currentSection = null;
