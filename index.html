@@ -9,16 +9,72 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+  /* ── Theme variables ── */
+  :root {
+    --bg:           #0a1628;
+    --sky-from:     #0a1628;
+    --sky-mid:      #0d2142;
+    --sky-mid2:     #112a55;
+    --sky-to:       #0e1e3d;
+    --text:         #ffffff;
+    --text-sub:     rgba(255,255,255,0.45);
+    --text-hint:    rgba(255,255,255,0.3);
+    --card-bg:      rgba(22,20,28,0.85);
+    --card-border:  rgba(255,255,255,0.08);
+    --glass-bg:     rgba(255,255,255,0.07);
+    --glass-border: rgba(255,255,255,0.12);
+    --pill-bg:      rgba(255,255,255,0.07);
+    --pill-border:  rgba(255,255,255,0.11);
+    --toggle-bg:    rgba(255,255,255,0.07);
+    --toggle-border:rgba(255,255,255,0.2);
+    --detail-bg:    #0a1628;
+    --detail-border:rgba(255,255,255,0.08);
+    --hero-label:   #60a5fa;
+    --tag-bg:       rgba(96,165,250,0.15);
+    --tag-color:    #60a5fa;
+    --info-row:     rgba(255,255,255,0.55);
+  }
+
+  body.light {
+    --bg:           #f0f4ff;
+    --sky-from:     #dce8ff;
+    --sky-mid:      #c8daff;
+    --sky-mid2:     #b8d0ff;
+    --sky-to:       #ccdaff;
+    --text:         #0d1b3e;
+    --text-sub:     rgba(13,27,62,0.5);
+    --text-hint:    rgba(13,27,62,0.35);
+    --card-bg:      rgba(255,255,255,0.92);
+    --card-border:  rgba(13,27,62,0.1);
+    --glass-bg:     rgba(255,255,255,0.6);
+    --glass-border: rgba(13,27,62,0.12);
+    --pill-bg:      rgba(255,255,255,0.7);
+    --pill-border:  rgba(13,27,62,0.12);
+    --toggle-bg:    rgba(255,255,255,0.6);
+    --toggle-border:rgba(13,27,62,0.15);
+    --detail-bg:    #eef3ff;
+    --detail-border:rgba(13,27,62,0.1);
+    --hero-label:   #1d4ed8;
+    --tag-bg:       rgba(29,78,216,0.1);
+    --tag-color:    #1d4ed8;
+    --info-row:     rgba(13,27,62,0.55);
+  }
+
+  /* smooth theme transition */
+  body, #sky, #detailScreen, .info-card, .sec-btn,
+  .lang-toggle, .ticker-pill, #heroCard, .back-btn,
+  .cat-tab, .info-card-logo { transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
+
   body {
     font-family: 'Nunito', sans-serif;
-    background: #0a1628;
+    background: var(--bg);
     min-height: 100vh;
     overflow-x: hidden;
   }
 
   #sky {
     position: fixed; inset: 0;
-    background: linear-gradient(175deg, #0a1628 0%, #0d2142 40%, #112a55 70%, #0e1e3d 100%);
+    background: linear-gradient(175deg, var(--sky-from) 0%, var(--sky-mid) 40%, var(--sky-mid2) 70%, var(--sky-to) 100%);
     z-index: 0;
   }
 
@@ -99,15 +155,15 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 17px; font-weight: 900; color: #fff;
   }
-  .logo-text { font-size: 17px; font-weight: 900; color: #fff; letter-spacing: -0.3px; }
+  .logo-text { font-size: 17px; font-weight: 900; color: var(--text); letter-spacing: -0.3px; }
   .logo-text span { color: #60a5fa; }
 
   .lang-toggle {
     display: flex; align-items: center; gap: 7px;
     padding: 7px 13px; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.07);
-    cursor: pointer; color: #fff;
+    border: 1px solid var(--toggle-border);
+    background: var(--toggle-bg);
+    cursor: pointer; color: var(--text);
     font-size: 13px; font-weight: 800;
     transition: background 0.2s;
   }
@@ -119,8 +175,8 @@
     margin: 16px 16px 0;
     padding: 22px 20px;
     border-radius: 24px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     backdrop-filter: blur(12px);
     opacity: 0; transform: translateY(18px);
     transition: opacity 0.5s 0.4s ease, transform 0.5s 0.4s ease;
@@ -128,11 +184,11 @@
   #heroCard.visible { opacity: 1; transform: translateY(0); }
 
   .hero-label {
-    font-size: 11px; font-weight: 800; color: #60a5fa;
+    font-size: 11px; font-weight: 800; color: var(--hero-label);
     letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 8px;
   }
-  .hero-question { font-size: 20px; font-weight: 900; color: #fff; line-height: 1.35; margin-bottom: 5px; }
-  .hero-sub      { font-size: 13px; color: rgba(255,255,255,0.45); }
+  .hero-question { font-size: 20px; font-weight: 900; color: var(--text); line-height: 1.35; margin-bottom: 5px; }
+  .hero-sub      { font-size: 13px; color: var(--text-sub); }
 
   /* ── Grid ── */
   #sectionGrid {
@@ -145,15 +201,15 @@
 
   .sec-btn {
     padding: 16px 14px; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
     cursor: pointer; text-align: left;
     transition: background 0.2s, transform 0.15s, border-color 0.2s;
   }
-  .sec-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.13); }
+  .sec-btn:active { transform: scale(0.96); background: var(--toggle-bg); }
   .sec-icon  { font-size: 26px; margin-bottom: 9px; display: block; }
-  .sec-title { font-size: 13px; font-weight: 800; color: #fff; line-height: 1.3; }
-  .sec-count { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 4px; }
+  .sec-title { font-size: 13px; font-weight: 800; color: var(--text); line-height: 1.3; }
+  .sec-count { font-size: 11px; color: var(--text-hint); margin-top: 4px; }
 
   .sec-btn.blue   { border-color: rgba(96,165,250,0.28); }
   .sec-btn.green  { border-color: rgba(74,222,128,0.28); }
@@ -170,7 +226,7 @@
   #tickerWrap.visible { opacity: 1; }
   .ticker-label {
     font-size: 11px; font-weight: 800;
-    color: rgba(255,255,255,0.3); letter-spacing: 1.4px;
+    color: var(--text-hint); letter-spacing: 1.4px;
     text-transform: uppercase; margin-left: 16px; margin-bottom: 9px;
   }
   .ticker-track {
@@ -184,9 +240,9 @@
   }
   .ticker-pill {
     padding: 9px 17px; border-radius: 30px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.11);
-    white-space: nowrap; font-size: 13px; font-weight: 700; color: #fff;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--text);
     cursor: pointer;
     display: flex; align-items: center; gap: 6px;
   }
@@ -195,7 +251,7 @@
   /* ── Detail screen ── */
   #detailScreen {
     position: fixed; inset: 0; z-index: 150;
-    background: #0a1628;
+    background: var(--detail-bg);
     transform: translateY(100%);
     transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
     display: flex; flex-direction: column;
@@ -206,17 +262,17 @@
   .detail-top {
     padding: 16px 18px;
     display: flex; align-items: center; gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid var(--detail-border);
     flex-shrink: 0;
   }
   .back-btn {
     width: 36px; height: 36px; border-radius: 12px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #fff; font-size: 18px; cursor: pointer;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text); font-size: 18px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
   }
-  .detail-title { font-size: 17px; font-weight: 900; color: #fff; }
+  .detail-title { font-size: 17px; font-weight: 900; color: var(--text); }
 
   /* ── Category tabs (edu only) ── */
   #eduTabs {
@@ -229,8 +285,8 @@
 
   .cat-tab {
     flex-shrink: 0; padding: 8px 22px; border-radius: 20px;
-    border: 1.5px solid rgba(255,255,255,0.2);
-    background: transparent; color: rgba(255,255,255,0.6);
+    border: 1.5px solid var(--toggle-border);
+    background: transparent; color: var(--text-sub);
     font-family: 'Nunito', sans-serif;
     font-size: 14px; font-weight: 800; cursor: pointer;
     transition: background 0.18s, color 0.18s, border-color 0.18s;
@@ -249,9 +305,9 @@
   .info-card {
     padding: 16px;
     border-radius: 18px;
-    background: rgba(22, 20, 28, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
   }
   .info-card-header {
@@ -260,19 +316,19 @@
   .info-card-logo {
     width: 52px; height: 52px; border-radius: 14px;
     object-fit: cover; flex-shrink: 0;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--glass-bg);
+    border: 1px solid var(--card-border);
   }
   .info-card-title { flex: 1; }
-  .info-card-name { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .info-card-name { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
   .info-card-tag  {
     display: inline-block; padding: 3px 10px; border-radius: 20px;
-    background: rgba(96,165,250,0.15); color: #60a5fa;
+    background: var(--tag-bg); color: var(--tag-color);
     font-size: 11px; font-weight: 700; margin-bottom: 10px;
   }
   .info-row {
     display: flex; align-items: center; gap: 8px;
-    font-size: 13px; color: rgba(255,255,255,0.55);
+    font-size: 13px; color: var(--info-row);
     margin-top: 5px;
   }
   .info-row span { font-size: 14px; }
@@ -342,9 +398,14 @@
       <div class="logo-dot">S</div>
       <div class="logo-text">Scout<span>Edu</span></div>
     </div>
-    <div class="lang-toggle" onclick="reopenLang()">
-      <span class="flag" id="currentFlag">🇺🇿</span>
-      <span id="currentLangCode">UZ</span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="lang-toggle" id="themeToggle" onclick="toggleTheme()">
+        <span id="themeIcon">☀️</span>
+      </div>
+      <div class="lang-toggle" onclick="reopenLang()">
+        <span class="flag" id="currentFlag">🇺🇿</span>
+        <span id="currentLangCode">UZ</span>
+      </div>
     </div>
   </div>
 
@@ -500,6 +561,15 @@ const T = {
 };
 
 let lang = 'uz';
+let isDark = true;
+
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.classList.toggle('light', !isDark);
+  document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
+  // hide stars in light mode
+  document.getElementById('starsLayer').style.opacity = isDark ? '1' : '0';
+}
 let activeEduCat = 'SAT';
 let currentSection = null;
 
